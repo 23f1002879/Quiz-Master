@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% block title %}Subject{% endblock %}
+{% block link %}
+<style>
+p {
+    
+    font-family: 'Times New Roman', Times, serif;
+}  
+p span{
+    font-size: xxx-large;
+}
+modal {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-3 mb-2 " style="display: inline-flex;
+">
+  <h2>Want to add new subject?</h2>
+  
+  <!--  Subject Button -->
+  <span style="margin-left: 730px;"><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#addSubjectModal">
+    Add Subject
+  </button></span>
+</div>
+
+<!--  Subject Modal -->
+<div class="modal" id="addSubjectModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Subject</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <form action="/admin/subject" method="POST">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="subjectId" class="form-label">Subject ID</label>
+            <input type="text" class="form-control" id="subjectId" name="id" required>
+          </div>
+          <div class="mb-3">
+            <label for="subjectName" class="form-label">Subject Name</label>
+            <input type="text" class="form-control" id="subjectName" name="name" required>
+          </div>
+          <div class="mb-3">
+            <label for="subjectDesc" class="form-label">Description</label>
+            <input type="text" class="form-control" id="subjectDesc" name="desc" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid">
+{% for subj in subject %}
+<div class="row mt-3" >
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+         <h2>{{subj.name}}</h2>
+         <a href="/admin/edit_subject/{{ subj.id }}" class="btn btn-outline-success">Edit Subject</a>
+         <a href="/admin/delete_subject/{{ subj.id }}" class="btn btn-outline-danger">Delete Subject</a>
+         <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Chapter Name</th>
+              <th>Number of Quiz</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for chap in chapter %}
+            {% if chap.subject_id == subj.id %}
+            <tr>
+              <td>{{chap.name}}</td>
+              <td>{{ number_of_quiz[chap.id] }}</td>
+              <td><a href="/admin/edit_chapter/{{ chap.id }}" class="btn btn-outline-success">Edit Chapter</a>
+                <a href="/admin/delete_chapter/{{ chap.id }}" class="btn btn-outline-danger">Delete Chapter</a></td>
+              <td><a href="/admin/add_quiz/{{ chap.id }}" class="btn btn-outline-primary">Add Quiz</a>
+                <a href="/admin/quiz" class="btn btn-outline-primary">View Quiz</a>
+              </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addChapterModal{{ subj.id }}">
+            Add Chapter
+          </button>
+        </div>
+        <div class="modal" id="addChapterModal{{ subj.id }}">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Chapter details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <form action="/admin/subject" method="POST">
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="chapterId" class="form-label">Chapter ID</label>
+                    <input type="text" class="form-control" id="chapterId" name="id" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="chapterName" class="form-label">Chapter Name</label>
+                    <input type="text" class="form-control" id="chapterName" name="name" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="chapterDesc" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="chapterDesc" name="desc" required>
+                  </div>
+                 <div class="mb-3">
+                    <label for="subjectIdForChapter" class="form-label">Subject ID</label>
+                    <input type="text" class="form-control" id="subjectIdForChapter" name="subject_id" required>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        
+    </div>
+      </div>
+  </div>
+</div>
+{% endfor %}
+ 
+</div>
+
+{% endblock %}
+
+

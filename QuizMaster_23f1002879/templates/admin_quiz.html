@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}Quiz Space{% endblock %}
+
+{% block link %}
+<style>
+    p {
+        font-family: 'Times New Roman', Times, serif;
+    }  
+    p span {
+        font-size: xxx-large;
+    }
+    modal {
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{% for qui in quiz %}
+    <div class="row mt-3">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h2>{{ qui.id }}</h2>
+                    <a href="/admin/edit_quiz/{{ qui.id }}" class="btn btn-outline-success">Edit Quiz</a>
+                    <a href="/admin/delete_quiz/{{ qui.id }}" class="btn btn-outline-danger">Delete Quiz</a>
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Question ID</th>
+                                <th>Question Statement</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for ques in questions %} 
+                                {% if ques.quiz_id == qui.id %}
+                                <tr>
+                                    <td>{{ ques.id }}</td>
+                                    <td>{{ ques.question_title }}</td>
+                                    <td>
+                                        <a href="/admin/edit_question/{{ ques.id }}" class="btn btn-outline-success">Edit Question</a>
+                                        <a href="/admin/delete_question/{{ ques.id }}" class="btn btn-outline-danger">Delete Question</a>
+                                    </td>
+                                </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addChapterModal{{ qui.id }}">
+                            Add Question
+                        </button>
+                    </div>
+
+                    <div class="modal" id="addChapterModal{{ qui.id }}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Question Details</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <form action="/admin/quiz" method="POST">
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="questionid" class="form-label">Question ID</label>
+                                            <input type="text" class="form-control" id="questionid" name="id" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="quizId" class="form-label">Quiz ID</label>
+                                            <input type="text" class="form-control" id="quizId" name="quiz_id" value="{{ qui.id }}" readonly required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="questionStatement" class="form-label">Question</label>
+                                            <input type="text" class="form-control" id="questionStatement" name="question_title" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="OptionsA" class="form-label">Option A</label>
+                                            <input type="text" class="form-control" id="OptionsA" name="option_a" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="OptionsB" class="form-label">Option B</label>
+                                            <input type="text" class="form-control" id="OptionsB" name="option_b" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="OptionsC" class="form-label">Option C</label>
+                                            <input type="text" class="form-control" id="OptionsC" name="option_c">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="OptionsD" class="form-label">Option D</label>
+                                            <input type="text" class="form-control" id="OptionsD" name="option_d">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="CorrectResponse" class="form-label">Correct Response</label>
+                                            <input type="text" class="form-control" id="CorrectResponse" name="correct_response" required>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}
