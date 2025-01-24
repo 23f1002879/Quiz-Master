@@ -13,6 +13,7 @@ class User(db.Model):
     fullname = db.Column(db.String(200), nullable=False)
     achievement = db.Column(db.String(256), nullable=False)
     dob = db.Column(db.DateTime, nullable=False)
+    role=db.Column(db.String,default='user',nullable=False)
     quiz_scores = db.relationship('Scores' , back_populates='user_details')
 #----------------------------------------------------------------------------------
 class Subject(db.Model):
@@ -30,25 +31,26 @@ class Chapters(db.Model):
     exams = db.relationship('Quiz', back_populates='chapter')
 #----------------------------------------------------------------------------------
 class Question(db.Model):
-    id = db.Column(db.Integer ,primary_key=True ,autoincrement=True)
+    id = db.Column(db.String ,primary_key=True)
     quiz_id = db.Column(db.String(50), db.ForeignKey("quiz.id"), nullable=False)
     question_title = db.Column(db.String, nullable=False)
     option_a = db.Column(db.String(255), nullable=False) 
     option_b = db.Column(db.String(255), nullable=False) 
-    option_c = db.Column(db.String(255), nullable=False)  
-    option_d= db.Column(db.String(255), nullable=False)
-    correct_response = db.Column(db.String, nullable=False)
+    option_c = db.Column(db.String(255), nullable=True)  
+    option_d= db.Column(db.String(255), nullable=True)
+    correct_response = db.Column(db.String(150), nullable=False)
     exam = db.relationship('Quiz', back_populates='questions')     
 #------------------------------------------------------------------------------------
 class Quiz(db.Model):
-    id = db.Column(db.String(50),primary_key=True)
-    chapter_id = db.Column(db.String(50), db.ForeignKey("chapters.id") ,nullable=False)
-    quiz_date = db.Column(db.DateTime , nullable=False)
-    duration = db.Column(db.DateTime , nullable=False)
+    id = db.Column(db.String(50), primary_key=True)
+    chapter_id = db.Column(db.String(50), db.ForeignKey("chapters.id"), nullable=False)
+    quiz_date = db.Column(db.DateTime, nullable=False)  
+    duration = db.Column(db.String(10), nullable=False)  
     remarks = db.Column(db.String(200), nullable=True)
-    scores = db.relationship('Scores' , back_populates='exam')
-    questions = db.relationship('Question' , back_populates='exam')
-    chapter = db.relationship('Chapters', back_populates='exams') 
+    scores = db.relationship('Scores', back_populates='exam')
+    questions = db.relationship('Question', back_populates='exam')
+    chapter = db.relationship('Chapters', back_populates='exams')
+
 #---------------------------------------------------------------------------------------   
 class Scores(db.Model):
     id = db.Column(db.Integer, primary_key=True , autoincrement=True)  
