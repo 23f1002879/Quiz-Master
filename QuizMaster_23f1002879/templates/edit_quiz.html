@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h2 style="text-align: center;">Edit Quiz</h2>
+
+<form method="POST">
+    <label for="quiz_id">Quiz ID:</label>
+    <input type="text" id="quiz_id" name="quiz_id" value="{{ quiz.id }}" readonly>
+
+    <label for="chapter_name">Chapter Name:</label>
+    <input type="text" id="chapter_name" name="chapter_name" value="{{ quiz.chapter.name }}" readonly>
+
+    <label for="quiz_date">Quiz Date:</label>
+    <input type="date" id="quiz_date" name="quiz_date" value="{{ quiz.quiz_date.strftime('%Y-%m-%d') }}" required>
+
+    <label for="duration">Duration:</label>
+    <input type="text" id="duration" name="duration" placeholder="hh:mm" value="{{ quiz.duration }}" required>
+
+    <label for="remarks">Remarks:</label>
+    <textarea id="remarks" name="remarks">{{ quiz.remarks }}</textarea>
+
+    <button type="submit">Save Changes</button>
+</form>
+
+</body>
+</html>

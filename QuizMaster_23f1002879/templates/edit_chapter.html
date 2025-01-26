@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Chapter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="bg-light-subtle" style="width: 400px; border-radius: 20px; box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.3); height: fit-content; padding: 20px; padding-bottom: 30px; margin-top: 10%;margin-left: 33%;margin-right: 33%;">
+
+            <h2 class="mb-4 mt-2" style="text-align: center;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-weight: bolder;">Edit Chapter - {{chapter.name}}</h2>
+            <form action="/admin/edit_chapter/{{ chapter.id }}" method="post">
+                <div class="mb-3">
+                    <label for="chapter_name" class="form-label">Name:</label>
+                    <input type="text" class="form-control" id="chapter_name" placeholder="Enter chapter name" name="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="chapter_description" class="form-label">Description:</label>
+                    <input type="text" class="form-control" id="chapter_description" placeholder="Enter chapter description" name="desc" required>
+                </div>
+                <div class="btn" style="display: flex;justify-content: center;">
+                    <span style="margin-right: 10px;"><button type="submit" class="btn btn-primary btn-inline-block">Save</button></span>
+                    <a href="/admin/subject/details" class="btn btn-danger">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
