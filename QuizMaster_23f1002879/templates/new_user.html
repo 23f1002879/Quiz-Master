@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/static/css/new_user.css" />
+  </head>
+
+  <body>
+                        <nav class="navbar navbar-expand-lg">
+                          <div class="container bg-light" style="border-radius: 30px">
+                            <a class="navbar-brand">
+                              <img
+                                src="/static/image/base.jpg"
+                                alt=""
+                                width="30"
+                                height="24"
+                                class="d-inline-block align-text-top rounded-circle"
+                                style="border-radius: 200px"
+                              />
+                              <i>Quiz Master</i>
+                            </a>
+                          </div>
+                        </nav>
+    <h2>Sign up</h2>
+    <div class="col">
+      <div>
+        <form action="/login/register" method="POST">
+          <!-- Username -->
+          <div>
+            <label for="username">Username:</label>
+            <input
+              class="form-control mb-2 mt-1"
+              type="email"
+              id="username"
+              name="username"
+              placeholder="Enter your E-mail"
+              required
+            />
+
+            <!-- PASSWORD -->
+
+            <label for="password">Password:</label>
+            <input
+              class="form-control mb-2 mt-1"
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              required
+            />
+
+            <!-- FULL_NAME -->
+
+            <label for="fullname">Full Name:</label>
+            <input
+              class="form-control mb-2 mt-1"
+              type="text"
+              id="fullname"
+              name="fullname"
+              placeholder="Enter your Full Name"
+              required
+            />
+
+            <!-- Qualification -->
+
+            <label for="achievement">Achievement</label>
+            <input
+              class="form-control mb-2 mt-1"
+              type="text"
+              id="achievemnet"
+              name="achievement"
+              placeholder="Enter your Qualifications"
+              required
+            />
+
+            <!-- DOB -->
+
+            <label for="dob">DOB :</label>
+            <input
+              class="form-control mb-2 mt-1"
+              type="date"
+              id="dob"
+              name="dob"
+              required
+            />
+            {% if message %}
+            <p style="color: red">{{ message }}</p>
+            {% endif %}
+
+            <p>Already have a account? <a href="/login">Sign in</a></p>
+
+            <button
+              type="submit"
+              class="btn btn-info"
+              style="border-radius: 20px; width: 280px"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

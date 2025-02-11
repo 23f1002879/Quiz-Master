@@ -1,0 +1,35 @@
+{% extends 'user_base.html' %} 
+{% block title %}Quiz Scores{% endblock %} 
+
+{% block content %}
+<div class="container mt-2">
+  <h2>{{ user.fullname }}'s Quiz Scores</h2>
+</div>
+<div class="row mt-3">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Quiz ID</th>
+              <th>Score</th>
+              <th>Date Attempted</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for score in scores %}
+            <tr>
+              <td>{{ score.exam.id }}</td>
+              <td>{{ score.total }}%</td>
+              <td>{{ score.attempt_time.strftime('%d-%m-%Y') }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

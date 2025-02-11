@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Question</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h2 style="text-align: center;">Edit Question</h2>
+
+<form method="POST">
+    <label for="quiz_id">Quiz ID:</label>
+    <input type="text" id="quiz_id" name="quiz_id" value="{{ question.quiz_id }}" readonly>
+    
+    <label for="question_title">Question Title:</label>
+    <input type="text" id="question_title" name="question_title" value="{{ question.question_title }}" required>
+    
+    <label for="option_a">Option A:</label>
+    <input type="text" id="option_a" name="option_a" value="{{ question.option_a }}" required>
+    
+    <label for="option_b">Option B:</label>
+    <input type="text" id="option_b" name="option_b" value="{{ question.option_b }}" required>
+    
+    <label for="option_c">Option C:</label>
+    <input type="text" id="option_c" name="option_c" value="{{ question.option_c }}" required>
+    
+    <label for="option_d">Option D:</label>
+    <input type="text" id="option_d" name="option_d" value="{{ question.option_d }}" required>
+    
+    <label for="correct_response">Correct Answer:</label>
+    <input type="text" id="correct_response" name="correct_response" value="{{ question.correct_response }}" required>
+    
+    <button type="submit">Save Changes</button>
+</form>
+
+</body>
+</html>
